@@ -21,8 +21,7 @@ enum NoteStatus : bool {
 };
 
 MIDI_CREATE_CUSTOM_INSTANCE(HardwareSerial, Serial, MIDI, MySettings)
-
-
+  
 // constants won't change. They're used here to set pin numbers:
 const int buttonPin[17] = {22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38}; // the number of the pushbutton pin
 const int ledPin =  13;      // the number of the LED pin
@@ -335,9 +334,6 @@ void loop()
 {
   unsigned long currTime = millis();
 
-
-
-  
   for(int x = 0; x<17; x++)
   {
     // read the state of the pushbutton value:
@@ -356,25 +352,22 @@ void loop()
           lcd.print(ham[hamIdx]); // Print the string "Hello World!"
           lcd.setCursor(0, 1);
           lcd.print(ham[hamIdx+1]);
-          
+         
           hamIdx=hamIdx+1;
           
           if(hamIdx > 271)
           {
             hamIdx = 0;
-          }
-          
+          }          
           cd[x]=currTime;
           MIDI.sendNoteOn((67+x), 127, 1);
           lastButtonState[x] = buttonState[x];
         }
         else
         {
-          //lastButtonState[x] = HIGH;
-        }
-        
-      }
-      //else if(buttonState[x] != lastButtonState[x])      
+
+        }  
+      } 
       else if(buttonState[x] == LOW)
       {
         MIDI.sendNoteOff((67+x), 0, 1);
@@ -384,8 +377,7 @@ void loop()
       else
       {
         
-      }
-      
+      } 
     }
   }
 }
